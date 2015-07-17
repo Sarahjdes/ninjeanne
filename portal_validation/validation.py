@@ -30,9 +30,7 @@ def goThrough(whichList):
     for row in whichList:
         result.append(row[0])
 
-    resultSet = set(result)
-
-    return resultSet
+    return result
 
 
 def compareSets(existing,entries):
@@ -42,5 +40,7 @@ def compareSets(existing,entries):
     entriesSet = set(goThrough(entries))
 
     forgotten = entriesSet.difference(existingSet)
+
+    print list(forgotten)
 
     return forgotten

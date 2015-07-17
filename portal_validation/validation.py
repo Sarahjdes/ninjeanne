@@ -23,21 +23,24 @@ csv_ins = csv.reader(f4)
 
     ## filter ##
 
+def goThrough(whichList):
 
-def findMissing(existingData,expectingData):
+    result = []
 
-    listExisting = []
-    listExpecting = []
+    for row in whichList:
+        result.append(row[0])
 
-    for row in existingData:
-        listExisting.append(row[0])
+    resultSet = set(result)
 
-    for row in expectingData:
-        listExpecting.append(row[0])
+    return resultSet
 
-    existingSet = set(listExisting)
-    expectingSet = set(listExpecting)
 
-    missing = expectingSet.difference(existingSet)
+def compareSets(existing,entries):
+    
+    existingSet = set(goThrough(existing))
+    
+    entriesSet = set(goThrough(entries))
 
-    print list(missing)
+    forgotten = entriesSet.difference(existingSet)
+
+    return forgotten

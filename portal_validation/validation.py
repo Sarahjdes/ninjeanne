@@ -41,6 +41,10 @@ def compareSets(existing,entries):
 
     forgotten = entriesSet.difference(existingSet)
 
-    print list(forgotten)
-
     return forgotten
+
+def intersection(list1,list2):
+
+    return list(set(goThrough(list1)) & set(goThrough(list2)))
+
+print intersection(csv_ele,csv_ens)

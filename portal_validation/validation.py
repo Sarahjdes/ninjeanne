@@ -18,4 +18,26 @@ f3 = open('cours.csv')
 csv_cours = csv.reader(f3)
 
 f4 = open('ins.csv')
-csv_ins = csv.readuer(f4)
+csv_ins = csv.reader(f4)
+
+
+    ## filter ##
+
+
+def findMissing(existingData,expectingData):
+
+    listExisting = []
+    listExpecting = []
+
+    for row in existingData:
+        listExisting.append(row[0])
+
+    for row in expectingData:
+        listExpecting.append(row[0])
+
+    existingSet = set(listExisting)
+    expectingSet = set(listExpecting)
+
+    missing = expectingSet.difference(existingSet)
+
+    print list(missing)

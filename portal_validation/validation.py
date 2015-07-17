@@ -47,4 +47,10 @@ def intersection(list1,list2):
 
     return list(set(goThrough(list1)) & set(goThrough(list2)))
 
-print intersection(csv_ele,csv_ens)
+def duplicates(whichList):
+
+    inputList = goThrough(whichList)
+
+    duplicatesList = set([x for x in inputList if inputList.count(x) > 1])
+
+    return list(duplicatesList)

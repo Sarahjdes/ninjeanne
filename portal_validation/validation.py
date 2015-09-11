@@ -1,5 +1,6 @@
 import csv         # import csv module
 import pprint
+import json
 
 # ele.csv       ele | fName | lName
 # ens.csv       ens | fName | lName
@@ -65,10 +66,12 @@ ens_teachers = set()
 for ens in list_ens:
     #Verify that there is no duplicates in list_ens
     if ens[0] in ens_teachers:
-        errors['errors_duplicate_teachers'].append(ens[0])
+        #errors['errors_duplicate_teachers'].append(ens[0])
+        errors['errors_duplicate_teachers'].append(ens)
     else:
         ens_teachers.add(ens[0])
-    
+
+
 ## filtering ##
 
 #Verify that every student in list_ins exist in list_ele
@@ -79,5 +82,49 @@ errors['errors_subscribed_missing_courses'] = list(ins_courses.difference(cours_
 
 #Verify that every teacher in list_cours exist in list_ens
 errors['errors_lecturing_missing_teacher'] = list(cours_teachers.difference(ens_teachers))
+err_teach = errors['errors_lecturing_missing_teacher']
+
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(errors)
+d = pp.pprint(errors)
+
+with open('mycsvfile.csv','wb') as f:
+    w = csv.writer(f)
+    w.writerow(errors.keys())
+    w.writerow(errors.values())
+
+print errors['errors_subscribed_missing_courses']
+
+
+file = open('errors_subscribed_missing_courses.csv', 'w')
+
+for x in errors['errors_subscribed_missing_courses']:
+    file.write(x + '\n')
+
+# csvfix join -f 2:1 ins.csv errors_subscribed_missing_courses.csv
+
+
+file = open('errors_subscribed_missing_students.csv', 'w')
+
+for x in errors['errors_subscribed_missing_students']:
+    file.write(x + '\n')
+
+
+
+file = open('errors_lecturing_missing_teacher.csv', 'w')
+
+for x in errors['errors_lecturing_missing_teacher']:
+    file.write(x + '\n')
+
+
+
+file = open('errors_duplicate_students.csv', 'w')
+
+for x in errors['errors_subscribed_missing_courses']:
+    file.write(x + '\n')
+
+
+
+file = open('errors_subscribed_missing_courses.csv', 'w')
+
+for x in errors['errors_subscribed_missing_courses']:
+    file.write(x + '\n')

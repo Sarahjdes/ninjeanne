@@ -92,9 +92,9 @@ with open('mycsvfile.csv','wb') as f:
     w.writerow(errors.keys())
     w.writerow(errors.values())
 
-print errors['errors_subscribed_missing_courses']
+#print errors['errors_subscribed_missing_courses']
 
-print errors['errors_subscribed_missing_students']
+#print errors['errors_subscribed_missing_students']
 
 
 

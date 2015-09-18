@@ -33,7 +33,7 @@ list_ins = parse(csv.reader(f4))
 errors = {
     'errors_subscribed_missing_students': [],
     'errors_subscribed_missing_courses': [],
-    'errors_lecturing_missing_teacher': [],
+    'errors_lecturing_missing_teachers': [],
     'errors_duplicate_students': [],
     'errors_duplicate_teachers': []
 }
@@ -81,8 +81,8 @@ errors['errors_subscribed_missing_students'] = list(ins_students.difference(ele_
 errors['errors_subscribed_missing_courses'] = list(ins_courses.difference(cours_courses))
 
 #Verify that every teacher in list_cours exist in list_ens
-errors['errors_lecturing_missing_teacher'] = list(cours_teachers.difference(ens_teachers))
-err_teach = errors['errors_lecturing_missing_teacher']
+errors['errors_lecturing_missing_teachers'] = list(cours_teachers.difference(ens_teachers))
+err_teach = errors['errors_lecturing_missing_teachers']
 
 pp = pprint.PrettyPrinter(indent=4)
 d = pp.pprint(errors)
@@ -94,37 +94,27 @@ with open('mycsvfile.csv','wb') as f:
 
 print errors['errors_subscribed_missing_courses']
 
-
-file = open('errors_subscribed_missing_courses.csv', 'w')
-
-for x in errors['errors_subscribed_missing_courses']:
-    file.write(x + '\n')
-
-# csvfix join -f 2:1 ins.csv errors_subscribed_missing_courses.csv
+print errors['errors_subscribed_missing_students']
 
 
-file = open('errors_subscribed_missing_students.csv', 'w')
+
+if len(errors['errors_subscribed_missing_students']) != 0:
+    print "missing students (%d):" % len(errors['errors_subscribed_missing_students'])
 
 for x in errors['errors_subscribed_missing_students']:
-    file.write(x + '\n')
+    print x
 
 
+if len(errors['errors_lecturing_missing_teachers']) != 0:
+    print "missing teachers (%d):" % len(errors['errors_lecturing_missing_teachers'])
 
-file = open('errors_lecturing_missing_teacher.csv', 'w')
-
-for x in errors['errors_lecturing_missing_teacher']:
-    file.write(x + '\n')
-
-
-
-file = open('errors_duplicate_students.csv', 'w')
-
-for x in errors['errors_subscribed_missing_courses']:
-    file.write(x + '\n')
+for x in errors['errors_lecturing_missing_teachers']:
+    print x
 
 
-
-file = open('errors_subscribed_missing_courses.csv', 'w')
+if len(errors['errors_subscribed_missing_courses']) != 0:
+    print "missing courses (%d):" % len(errors['errors_subscribed_missing_courses'])
 
 for x in errors['errors_subscribed_missing_courses']:
-    file.write(x + '\n')
+    print x
+

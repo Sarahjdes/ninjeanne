@@ -104,12 +104,20 @@ if len(errors['errors_subscribed_missing_students']) != 0:
 for x in errors['errors_subscribed_missing_students']:
     print x
 
+for x in errors['errors_subscribed_missing_students']:
+    with open("missing_students.csv", "a") as myfile:
+        myfile.write(x + "\n")
+
 
 if len(errors['errors_lecturing_missing_teachers']) != 0:
     print "missing teachers (%d):" % len(errors['errors_lecturing_missing_teachers'])
 
 for x in errors['errors_lecturing_missing_teachers']:
     print x
+
+for x in errors['errors_lecturing_missing_teachers']:
+    with open("missing_teachers.csv", "a") as myfile:
+        myfile.write(x + "\n")
 
 
 if len(errors['errors_subscribed_missing_courses']) != 0:
@@ -118,3 +126,6 @@ if len(errors['errors_subscribed_missing_courses']) != 0:
 for x in errors['errors_subscribed_missing_courses']:
     print x
 
+for x in errors['errors_subscribed_missing_courses']:
+    with open("missing_courses.csv", "a") as myfile:
+        myfile.write(x + "\n")
